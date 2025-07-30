@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class Stock {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long productId;
@@ -27,5 +27,13 @@ public class Stock {
 
     public Long getQuantity() {
         return quantity;
+    }
+
+    //재고 감소
+    public void decrease(Long quantity) {
+        if (this.quantity - quantity < 0) {
+            throw new RuntimeException("재고는 0개 미만이 될 수 없습니다.");
+        }
+        this.quantity -= quantity;
     }
 }

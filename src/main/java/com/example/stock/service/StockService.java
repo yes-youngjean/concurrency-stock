@@ -14,9 +14,17 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
-    public void decrease(Long id,
-                         Long quantity) {
+//    @Transactional
+    /**
+     * @Transactional
+     * => DB에 한꺼번에 반영됌!
+     * => 첫번째 Thread는 1을 줄였지만 DB에는 반영이 안 되서 두번째 Thread는 첫번째 Thread가 줄인 정보에 대해 알 수 없음
+     * */
+    public synchronized void decrease(Long id,
+                                      Long quantity) {
+        /**
+         * synchronized => 1개의 Thread만 접근 가능함
+         * */
         // Stock 조회
         Stock stock = stockRepository.findById(id).orElseThrow();
         stock.decrease(quantity);

@@ -61,7 +61,8 @@ class StockServiceTest {
         latch.await();
 
         Stock stock = stockRepository.findById(1L).orElseThrow();
-        assertNotEquals(0, stock.getQuantity());
+        assertEquals(0, stock.getQuantity());
+//        assertNotEquals(0, stock.getQuantity());
         /**
          * Thread1이 값을 가져가 갱신중인데, Thread2도 동일한 값을 가져가 갱신하며 동시성 문제 발생
          * */

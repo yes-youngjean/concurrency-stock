@@ -53,6 +53,7 @@ class OptimisticLockStockFacadeTest {
                 }
             });
         }
+
         latch.await();
 
         Stock stock = stockRepository.findById(1L).orElseThrow();
